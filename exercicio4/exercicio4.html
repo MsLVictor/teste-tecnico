@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 4 </title>
+    <script>
+         document.addEventListener('DOMContentLoaded', () => {
+            const faturamento = {
+                "SP": 67836.43,
+                "RJ": 36678.66,
+                "MG": 29229.88,
+                "ES": 27165.48,
+                "Outros": 19849.53
+            };
+
+            const total = Object.values(faturamento).reduce((acc, val) => acc + val, 0);
+
+            const percentuais = {};
+            for (const estado in faturamento) {
+                percentuais[estado] = (faturamento[estado] / total * 100).toFixed(2);
+            }
+
+            const tabela = document.getElementById('tabela');
+            for (const estado in percentuais) {
+                const row = tabela.insertRow();
+                const cellEstado = row.insertCell(0);
+                const cellPercentual = row.insertCell(1);
+                cellEstado.textContent = estado;
+                cellPercentual.textContent = `${percentuais[estado]}%`;
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Percentual de Faturamento por Estado</h1>
+    <table border="1" id="tabela">
+        <thead>
+            <tr>
+                <th>Estado</th>
+                <th>Percentual</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</body>
+</html>
